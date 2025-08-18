@@ -2,6 +2,7 @@ import axios from 'axios';
 import type { NewNote, Note, FetchNoteList } from '../types/note';
 
 axios.defaults.baseURL = 'https://notehub-public.goit.study/api';
+// axios.defaults.baseURL = 'https://notehub-api.goit.study';
 
 const token = process.env.NEXT_PUBLIC_NOTEHUB_TOKEN;
 
