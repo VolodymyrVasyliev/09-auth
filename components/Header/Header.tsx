@@ -1,9 +1,10 @@
 import Link from 'next/link';
 import css from './Header.module.css';
 import TagsMenu from '../TagsMenu/TagsMenu';
+import AuthNavigation from '../AuthNavigation/AuthNavigation';
 
 const Header = async () => {
-const tags = ['Todo', 'Work', 'Personal', 'Meeting', 'Shopping'];
+  const tags = ['Todo', 'Work', 'Personal', 'Meeting', 'Shopping'];
 
   return (
     <header className={css.header}>
@@ -18,6 +19,7 @@ const tags = ['Todo', 'Work', 'Personal', 'Meeting', 'Shopping'];
           <li>
             <TagsMenu tags={tags} />
           </li>
+          <AuthNavigation />
         </ul>
       </nav>
     </header>

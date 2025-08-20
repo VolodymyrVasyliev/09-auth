@@ -14,10 +14,17 @@
   color: white;
   font-size: 1.5rem;
   font-weight: bold;
+   transition: color 0.3s ease, text-shadow 0.3s ease;
 }
 
 .header a:hover {
-  color: #ddd;
+  color: #bababa;
+  text-shadow: 
+    0 0 5px #fff,
+    0 0 10px #fff,
+    0 0 20px #ffd700,
+    0 0 30px #ffd700,
+    0 0 40px #ff8c00;
 }
 
 .navigation {
@@ -28,6 +35,11 @@
   gap: 1rem;
 }
 
+.navigation li {
+  display: flex;         
+  align-items: center;  
+}
+
 .navigation li a {
   text-decoration: none;
   color: white;
@@ -36,4 +48,4 @@
 
 .navigation li a:hover {
   color: #ddd;
-}
+} 

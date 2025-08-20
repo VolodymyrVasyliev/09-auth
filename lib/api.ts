@@ -1,8 +1,11 @@
 import axios from 'axios';
 import type { NewNote, Note, FetchNoteList } from '../types/note';
 
-axios.defaults.baseURL = 'https://notehub-public.goit.study/api';
-// axios.defaults.baseURL = 'https://notehub-api.goit.study';
+
+const nextServer = axios.create({
+  baseURL: 'http://localhost:3000/api',
+  withCredentials: true,
+});
 
 const token = process.env.NEXT_PUBLIC_NOTEHUB_TOKEN;
 
@@ -22,7 +25,7 @@ export const fetchNotes = async (
     params.search = search;
   }
 
-  const response = await axios.get<FetchNoteList>(`/notes`, {
+  const response = await nextServer.get<FetchNoteList>(`/notes`, {
     headers: {
       Authorization: `Bearer ${token}`,
     },
@@ -33,7 +36,7 @@ export const fetchNotes = async (
 };
 
 export const fetchNoteById = async (id: string): Promise<Note> => {
-  const response = await axios.get<Note>(`/notes/${id}`, {
+  const response = await nextServer.get<Note>(`/notes/${id}`, {
     headers: {
       Authorization: `Bearer ${token}`,
     },
@@ -43,7 +46,7 @@ export const fetchNoteById = async (id: string): Promise<Note> => {
 };
 
 export const createNote = async (noteData: NewNote): Promise<Note> => {
-  const response = await axios.post<Note>('/notes', noteData, {
+  const response = await nextServer.post<Note>('/notes', noteData, {
     headers: {
       Authorization: `Bearer ${token}`,
     },
@@ -53,7 +56,7 @@ export const createNote = async (noteData: NewNote): Promise<Note> => {
 };
 
 export const deleteNote = async (noteId: string): Promise<Note> => {
-  const response = await axios.delete<Note>(`/notes/${noteId}`, {
+  const response = await nextServer.delete<Note>(`/notes/${noteId}`, {
     headers: {
       Authorization: `Bearer ${token}`,
     },
