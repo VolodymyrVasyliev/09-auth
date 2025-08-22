@@ -1,13 +1,13 @@
 import axios from 'axios';
 import type { NewNote, Note, FetchNoteList } from '../types/note';
 
+const baseURL = process.env.NEXT_PUBLIC_API_URL+'/api';
 
-const nextServer = axios.create({
-  baseURL: 'http://localhost:3000/api',
+export const nextServer = axios.create({
+  baseURL,
   withCredentials: true,
 });
 
-const token = process.env.NEXT_PUBLIC_NOTEHUB_TOKEN;
 
 export const fetchNotes = async (
   page: number,
@@ -26,9 +26,6 @@ export const fetchNotes = async (
   }
 
   const response = await nextServer.get<FetchNoteList>(`/notes`, {
-    headers: {
-      Authorization: `Bearer ${token}`,
-    },
     params,
   });
 
@@ -36,31 +33,19 @@ export const fetchNotes = async (
 };
 
 export const fetchNoteById = async (id: string): Promise<Note> => {
-  const response = await nextServer.get<Note>(`/notes/${id}`, {
-    headers: {
-      Authorization: `Bearer ${token}`,
-    },
-  });
+  const response = await nextServer.get<Note>(`/notes/${id}`);
 
   return response.data;
 };
 
 export const createNote = async (noteData: NewNote): Promise<Note> => {
-  const response = await nextServer.post<Note>('/notes', noteData, {
-    headers: {
-      Authorization: `Bearer ${token}`,
-    },
-  });
+  const response = await nextServer.post<Note>('/notes', noteData);
 
   return response.data;
 };
 
 export const deleteNote = async (noteId: string): Promise<Note> => {
-  const response = await nextServer.delete<Note>(`/notes/${noteId}`, {
-    headers: {
-      Authorization: `Bearer ${token}`,
-    },
-  });
+  const response = await nextServer.delete<Note>(`/notes/${noteId}`);
 
   return response.data;
 };

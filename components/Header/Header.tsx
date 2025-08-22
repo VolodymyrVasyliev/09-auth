@@ -4,11 +4,22 @@ import TagsMenu from '../TagsMenu/TagsMenu';
 import AuthNavigation from '../AuthNavigation/AuthNavigation';
 
 const Header = async () => {
-  const tags = ['Todo', 'Work', 'Personal', 'Meeting', 'Shopping'];
+  const tags = [
+    'Todo',
+    'Work',
+    'Personal',
+    'Meeting',
+    'Shopping',
+    'Ideas',
+    'Travel',
+    'Finance',
+    'Health',
+    'Important',
+  ];
 
   return (
     <header className={css.header}>
-      <Link href="/" aria-label="Home">
+      <Link className={css.logo} href="/" aria-label="Home">
         NoteHub
       </Link>
       <nav aria-label="Main Navigation">

@@ -1,6 +1,8 @@
 import Link from 'next/link';
 import css from './ProfilePage.module.css';
 import { Metadata } from 'next';
+import Image from 'next/image';
+// import { getProfile } from '@/lib/serverApi';
 
 export const metadata: Metadata = {
   title: 'Profile',
@@ -21,7 +23,8 @@ export const metadata: Metadata = {
   },
 };
 
-export default function Profile() {
+export default async function Profile() {
+  // const user = await getProfile();
   return (
     <main className={css.mainContent}>
       <div className={css.profileCard}>
@@ -32,13 +35,22 @@ export default function Profile() {
           </Link>
         </div>
         <div className={css.avatarWrapper}>
-          <img src="Avatar" alt="User Avatar" width={120} height={120} className={css.avatar} />
+          <Image
+            src="https://ac.goit.global/fullstack/react/default-avatar.jpg"
+            alt="User Avatar"
+            width={120}
+            height={120}
+            className={css.avatar}
+          />
         </div>
         <div className={css.profileInfo}>
-          <p>Username: your_username</p>
-          <p>Email: your_email@example.com</p>
+          <p>Username: </p>
+          <p>Email:</p>
         </div>
       </div>
     </main>
   );
+}
+{
+  // user.username;
 }
