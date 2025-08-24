@@ -21,3 +21,4 @@ export interface FetchNoteList {
   notes: Note[];
   totalPages: number;
 }
+

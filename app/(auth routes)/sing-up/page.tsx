@@ -2,7 +2,7 @@
 import css from './SignInPage.module.css';
 import { useRouter } from 'next/navigation';
 import { RegisterRequest } from '@/types/user';
-import { registerUser } from '@/lib/clientApi';
+import { registerUser } from '@/lib/api/clientApi';
 import { useState } from 'react';
 import { isAxiosError } from 'axios';
 import { logErrorResponse } from '@/app/api/_utils/utils';
@@ -28,8 +28,6 @@ const Register = () => {
         setError('An unexpected error occurred');
       }
     }
-      
-    
   };
 
   return (
