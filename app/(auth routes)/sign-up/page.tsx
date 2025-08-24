@@ -1,40 +1,33 @@
 'use client';
-import { useState } from 'react';
 import { useRouter } from 'next/navigation';
-import { loginUser } from '@/lib/api/clientApi';
-import { LoginRequest } from '@/types/user';
-import css from './SignInPage.module.css';
+import { RegisterRequest } from '@/types/user';
+import { registerUser } from '@/lib/api/clientApi';
+import { useState } from 'react';
 import { ApiError } from '@/types/error';
-import { useAuthStore } from '@/lib/store/authStore';
+import css from"./SignUpPage.module.css"
 
-export default function SignIn() {
+const Register = () => {
   const router = useRouter();
   const [error, setError] = useState('');
-  const setUser = useAuthStore((state) => state.setUser);
-  const handleSubmit = async (formData: FormData) => {
+
+  const handleSRegister = async (formData: FormData) => {
     try {
-      const formValues = Object.fromEntries(formData) as LoginRequest;
-      const res = await loginUser(formValues);
-      console.log('res', res);
+      const data = Object.fromEntries(formData) as RegisterRequest;
+      const res = await registerUser(data);
       if (res) {
-        setUser(res);
         router.push('/profile');
       } else {
-        setError('Invalid email or password');
+        setError('invalid email or password');
       }
     } catch (error) {
-      setError(
-        (error as ApiError).response?.data?.error ??
-          (error as ApiError).message ??
-          'Oops... some error'
-      );
+      setError((error as ApiError).message);
     }
   };
+
   return (
     <main className={css.mainContent}>
-      <form action={handleSubmit} className={css.form}>
-        <h1 className={css.formTitle}>Sign in</h1>
-
+      <h1 className={css.formTitle}>Sign up</h1>
+      <form action={handleSRegister} className={css.form}>
         <div className={css.formGroup}>
           <label htmlFor="email">Email</label>
           <input id="email" type="email" name="email" className={css.input} required />
@@ -47,7 +40,7 @@ export default function SignIn() {
 
         <div className={css.actions}>
           <button type="submit" className={css.submitButton}>
-            Log in
+            Register
           </button>
         </div>
 
@@ -55,4 +48,6 @@ export default function SignIn() {
       </form>
     </main>
   );
-}
+};
+
+export default Register;

@@ -1,33 +1,40 @@
 'use client';
-import css from './SignInPage.module.css';
-import { useRouter } from 'next/navigation';
-import { RegisterRequest } from '@/types/user';
-import { registerUser } from '@/lib/api/clientApi';
 import { useState } from 'react';
+import { useRouter } from 'next/navigation';
+import { loginUser } from '@/lib/api/clientApi';
+import { LoginRequest } from '@/types/user';
 import { ApiError } from '@/types/error';
+import { useAuthStore } from '@/lib/store/authStore';
+import css from "./SignInPage.module.css"
 
-const Register = () => {
+export default function SignIn() {
   const router = useRouter();
   const [error, setError] = useState('');
-
-  const handleSRegister = async (formData: FormData) => {
+  const setUser = useAuthStore((state) => state.setUser);
+  const handleSubmit = async (formData: FormData) => {
     try {
-      const data = Object.fromEntries(formData) as RegisterRequest;
-      const res = await registerUser(data);
+      const formValues = Object.fromEntries(formData) as LoginRequest;
+      const res = await loginUser(formValues);
+      console.log('res', res);
       if (res) {
+        setUser(res);
         router.push('/profile');
       } else {
-        setError('invalid email or password');
+        setError('Invalid email or password');
       }
     } catch (error) {
-      setError((error as ApiError).message);
+      setError(
+        (error as ApiError).response?.data?.error ??
+          (error as ApiError).message ??
+          'Oops... some error'
+      );
     }
   };
-
   return (
     <main className={css.mainContent}>
-      <h1 className={css.formTitle}>Sign up</h1>
-      <form action={handleSRegister} className={css.form}>
+      <form action={handleSubmit} className={css.form}>
+        <h1 className={css.formTitle}>Sign in</h1>
+
         <div className={css.formGroup}>
           <label htmlFor="email">Email</label>
           <input id="email" type="email" name="email" className={css.input} required />
@@ -40,7 +47,7 @@ const Register = () => {
 
         <div className={css.actions}>
           <button type="submit" className={css.submitButton}>
-            Register
+            Log in
           </button>
         </div>
 
@@ -48,6 +55,4 @@ const Register = () => {
       </form>
     </main>
   );
-};
-
-export default Register;
+}

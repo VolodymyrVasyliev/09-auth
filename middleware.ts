@@ -2,8 +2,10 @@ import { NextRequest, NextResponse } from 'next/server';
 import { cookies } from 'next/headers';
 import { checkServerSession } from './lib/api/serverApi';
 import { parse } from 'cookie';
+
 const privateRoutes = ['/profile', '/notes'];
 const publicRoutes = ['/sign-in', '/sign-up'];
+
 export async function middleware(request: NextRequest) {
   const { pathname } = request.nextUrl;
   const cookieStore = await cookies();
@@ -11,6 +13,8 @@ export async function middleware(request: NextRequest) {
   const refreshToken = cookieStore.get('refreshToken')?.value;
   const isPublicRoute = publicRoutes.some((route) => pathname.startsWith(route));
   const isPrivateRoute = privateRoutes.some((route) => pathname.startsWith(route));
+    // const isPrivateRoute = privateRoutes.includes(pathname);
+    // const isPublicRoute = publicRoutes.includes(pathname);
   if (!accessToken) {
     if (refreshToken) {
       const data = await checkServerSession();

@@ -21,7 +21,6 @@ export async function GET(request: NextRequest) {
       },
       headers: {
         Cookie: cookieStore.toString(),
-        // Authorization: request.headers.get('authorization') ?? '',
       },
     });
 
