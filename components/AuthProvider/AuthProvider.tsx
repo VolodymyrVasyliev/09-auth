@@ -8,6 +8,7 @@ type Props = {
   children: React.ReactNode;
 };
 
+
 const AuthProvider = ({ children }: Props) => {
   const setUser = useAuthStore((state) => state.setUser);
   const clearIsAuthenticated = useAuthStore((state) => state.clearIsAuthenticated);
