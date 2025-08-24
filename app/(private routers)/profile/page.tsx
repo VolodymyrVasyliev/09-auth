@@ -2,7 +2,7 @@ import Link from 'next/link';
 import css from './ProfilePage.module.css';
 import { Metadata } from 'next';
 import Image from 'next/image';
-// import { getProfile } from '@/lib/serverApi';
+import { getProfile } from '@/lib/api/serverApi';
 
 export const metadata: Metadata = {
   title: 'Profile',
@@ -24,7 +24,7 @@ export const metadata: Metadata = {
 };
 
 export default async function Profile() {
-  // const user = await getProfile();
+  const user = await getProfile();
   return (
     <main className={css.mainContent}>
       <div className={css.profileCard}>
@@ -44,13 +44,13 @@ export default async function Profile() {
           />
         </div>
         <div className={css.profileInfo}>
-          <p>Username: </p>
-          <p>Email:</p>
+          <p>Username:{user.username} </p>
+          <p>Email:{user.email}</p>
         </div>
       </div>
     </main>
   );
 }
 {
-  // user.username;
+  
 }

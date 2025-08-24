@@ -4,8 +4,7 @@ import { useRouter } from 'next/navigation';
 import { RegisterRequest } from '@/types/user';
 import { registerUser } from '@/lib/api/clientApi';
 import { useState } from 'react';
-import { isAxiosError } from 'axios';
-import { logErrorResponse } from '@/app/api/_utils/utils';
+import { ApiError } from '@/types/error';
 
 const Register = () => {
   const router = useRouter();
@@ -21,12 +20,7 @@ const Register = () => {
         setError('invalid email or password');
       }
     } catch (error) {
-      if (isAxiosError(error)) {
-        logErrorResponse(error);
-        setError(error.response?.data?.message || 'Invalid email or password');
-      } else {
-        setError('An unexpected error occurred');
-      }
+      setError((error as ApiError).message);
     }
   };
 
