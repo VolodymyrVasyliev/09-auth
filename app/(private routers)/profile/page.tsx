@@ -1,17 +1,18 @@
 import Link from 'next/link';
+import Image from 'next/image';
 import css from './ProfilePage.module.css';
 import { Metadata } from 'next';
-import Image from 'next/image';
 import { getProfile } from '@/lib/api/serverApi';
 
+
 export const metadata: Metadata = {
-  title: 'Profile',
-  description: 'Personal user page',
+  title: 'Personal NoteHub',
+  description: 'Personal profile page with notes',
   openGraph: {
-    title: 'Profile',
-    description: 'Personal user page',
+    title: 'Personal NoteHub',
+    description: 'Personal profile page with notes',
     siteName: 'NoteHub',
-    url: 'https://08-zustand-livid.vercel.app',
+    url: 'https://09-auth-f227bu20i-volodymyrvasylievs-projects.vercel.app/profile',
     images: [
       {
         url: 'https://ac.goit.global/fullstack/react/notehub-og-meta.jpg',
@@ -30,7 +31,7 @@ export default async function Profile() {
       <div className={css.profileCard}>
         <div className={css.header}>
           <h1 className={css.formTitle}>Profile Page</h1>
-          <Link href="/" className={css.editProfileButton}>
+          <Link href="/profile/edit" className={css.editProfileButton}>
             Edit Profile
           </Link>
         </div>

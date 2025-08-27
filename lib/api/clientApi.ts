@@ -8,7 +8,6 @@ type CheckSessionRequest = {
 
 export type UpdateUserRequest = {
   username: string;
-  email:string
 };
 
 export const checkSession = async () => {
@@ -31,8 +30,8 @@ export const logoutUser = async ()=> {
 };
 
 export const getMe = async () => {
-  const { data } = await nextServer.get<User>('/users/me');
-  return data;
+  const response = await nextServer.get<User>('/users/me');
+  return response.data;
 };
 
 export const updateMe = async (data: UpdateUserRequest) => {

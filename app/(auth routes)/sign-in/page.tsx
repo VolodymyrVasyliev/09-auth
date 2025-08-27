@@ -24,7 +24,7 @@ export default function SignIn() {
       }
     } catch (error) {
       setError(
-        (error as ApiError).response?.data?.error ??
+        (error as ApiError).response?.data?.message ??
           (error as ApiError).message ??
           'Oops... some error'
       );

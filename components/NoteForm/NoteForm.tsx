@@ -46,7 +46,7 @@ const NoteForm = () => {
   });
 
   const handleSubmit = (formData: FormData) => {
-    const data = Object.fromEntries(formData) as unknown as NewNote;
+    const data = Object.fromEntries(formData) as NewNote;
     // const data: NewNote = {
     //   title: formData.get('title') as string,
     //   content: formData.get('content') as string,
