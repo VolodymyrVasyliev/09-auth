@@ -20,7 +20,11 @@ const Register = () => {
         setError('invalid email or password');
       }
     } catch (error) {
-      setError((error as ApiError).message);
+      setError(
+        (error as ApiError).response?.data?.message ??
+          (error as ApiError).message ??
+          'Oops... some error'
+      );
     }
   };
 
