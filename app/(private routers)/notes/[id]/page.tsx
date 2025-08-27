@@ -1,4 +1,4 @@
-import { fetchNoteById } from '@/lib/api/clientApi';
+import { fetchNoteById } from '@/lib/api/serverApi';
 import { QueryClient, HydrationBoundary, dehydrate } from '@tanstack/react-query';
 import NoteDetailsClient from './NoteDetails.client';
 import { Metadata } from 'next';
@@ -17,7 +17,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
       title: `Note: ${note.title} `,
       description: `Note description: ${note.content.slice(0, 10)} ...`,
       siteName: 'NoteHub',
-      url: `https://09-auth-roan.vercel.app//notes/${id}`,
+      url: `https://09-auth-roan.vercel.app/notes/${id}`,
       images: [
         {
           url: 'https://ac.goit.global/fullstack/react/notehub-og-meta.jpg',
