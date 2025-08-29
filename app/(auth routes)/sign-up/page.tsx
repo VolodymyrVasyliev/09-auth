@@ -1,7 +1,7 @@
 'use client';
 import { useRouter } from 'next/navigation';
 import { RegisterRequest } from '@/types/user';
-import { registerUser } from '@/lib/api/clientApi';
+import { register } from '@/lib/api/clientApi';
 import { useState } from 'react';
 import { ApiError } from '@/types/error';
 import css from"./SignUpPage.module.css"
@@ -13,7 +13,7 @@ const Register = () => {
   const handleSRegister = async (formData: FormData) => {
     try {
       const data = Object.fromEntries(formData) as RegisterRequest;
-      const res = await registerUser(data);
+      const res = await register(data);
       if (res) {
         router.push('/profile');
       } else {

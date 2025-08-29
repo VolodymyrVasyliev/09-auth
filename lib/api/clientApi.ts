@@ -15,7 +15,7 @@ export const checkSession = async () => {
   return response.data.success;
 };
 
-export const registerUser = async (data: RegisterRequest) => {
+export const register = async (data: RegisterRequest) => {
   const response = await nextServer.post<User>('/auth/register', data);
   return response.data;
 };
@@ -25,7 +25,7 @@ export const loginUser = async (data: LoginRequest) => {
   return response.data;
 };
 
-export const logoutUser = async ()=> {
+export const logoutUser = async () => {
   await nextServer.post('/auth/logout');
 };
 

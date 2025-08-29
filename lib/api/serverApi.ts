@@ -3,6 +3,10 @@ import { cookies } from 'next/headers';
 import { User } from '@/types/user';
 import { FetchNoteList, Note } from '@/types/note';
 
+export type SessionRequest = {
+  message: string;
+};
+
 export const fetchNotes = async (
   page: number,
   search: string,
@@ -37,18 +41,18 @@ export const fetchNoteById = async (id: string): Promise<Note> => {
 
   const response = await nextServer.get<Note>(`/notes/${id}`, {
     headers: {
-      cookieHeader,
+      Cookie: cookieHeader,
     },
   });
 
   return response.data;
 };
 
-export const getProfile = async () => {
+export const fetchUserProfile = async (): Promise<User> => {
   const cookieStore = await cookies();
   const cookieHeader = cookieStore.toString();
 
-  const response = await nextServer.get<User>('/users/me', {
+  const response = await nextServer.get('/users/me', {
     headers: {
       Cookie: cookieHeader,
     },
@@ -57,15 +61,15 @@ export const getProfile = async () => {
   return response.data;
 };
 
-export const checkServerSession = async () => {
+export const checkServerSession = async (): Promise<SessionRequest> => {
   const cookieStore = await cookies();
   const cookieHeader = cookieStore.toString();
 
-  const response = await nextServer.get('/auth/session', {
+  const response = await nextServer.get<SessionRequest>('/auth/session', {
     headers: {
       Cookie: cookieHeader,
     },
   });
 
-  return response;
+  return response.data;
 };

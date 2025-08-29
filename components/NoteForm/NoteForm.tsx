@@ -7,26 +7,15 @@ import { createNote } from '@/lib/api/clientApi';
 import { useNoteDraftStore } from '@/lib/store/noteStore';
 import type { NewNote } from '@/types/note';
 
-const tags = [
-  'Todo',
-  'Work',
-  'Personal',
-  'Meeting',
-  'Shopping',
-  'Ideas',
-  'Travel',
-  'Finance',
-  'Health',
-  'Important',
-];
+const tags = ['Todo', 'Work', 'Personal', 'Meeting', 'Shopping'];
 
 const NoteForm = () => {
   const router = useRouter();
   const id = useId();
 
-  const handleClickCancel = () => router.push('/notes/filter/all');
-
   const { draft, setDraft, clearDraft } = useNoteDraftStore();
+
+  const handleClickCancel = () => router.push('/notes/filter/all');
 
   const handleChange = (
     event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>
@@ -66,10 +55,9 @@ const NoteForm = () => {
           type="text"
           name="title"
           className={css.input}
-          defaultValue={draft?.title}
+          value={draft?.title}
           onChange={handleChange}
         />
-        {/* <span name="title" className={css.error} /> */}
       </div>
 
       <div className={css.formGroup}>
@@ -79,11 +67,9 @@ const NoteForm = () => {
           name="content"
           rows={8}
           className={css.textarea}
-          defaultValue={draft?.content}
+          value={draft?.content}
           onChange={handleChange}
         />
-
-        {/* <span name="content" className={css.error} /> */}
       </div>
 
       <div className={css.formGroup}>
@@ -93,7 +79,7 @@ const NoteForm = () => {
             id={`${id}-tag`}
             name="tag"
             className={css.select}
-            defaultValue={draft?.tag}
+            value={draft?.tag}
             onChange={handleChange}
           >
             {tags.map((tag) => (
@@ -103,7 +89,6 @@ const NoteForm = () => {
             ))}
           </select>
         }
-        {/* <span name="tag" className={css.error} /> */}
       </div>
 
       <div className={css.actions}>
