@@ -3,9 +3,7 @@ import { cookies } from 'next/headers';
 import { User } from '@/types/user';
 import { FetchNoteList, Note } from '@/types/note';
 
-export type SessionRequest = {
-  message: string;
-};
+
 
 export const fetchNotes = async (
   page: number,
@@ -61,11 +59,11 @@ export const fetchUserProfile = async (): Promise<User> => {
   return response.data;
 };
 
-export const checkServerSession = async (): Promise<SessionRequest> => {
+export const checkServerSession = async () => {
   const cookieStore = await cookies();
   const cookieHeader = cookieStore.toString();
 
-  const response = await nextServer.get<SessionRequest>('/auth/session', {
+  const response = await nextServer.get('/auth/session', {
     headers: {
       Cookie: cookieHeader,
     },

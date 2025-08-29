@@ -13,8 +13,6 @@ export async function middleware(request: NextRequest) {
   const refreshToken = cookieStore.get('refreshToken')?.value;
   const isPublicRoute = publicRoutes.some((route) => pathname.startsWith(route));
   const isPrivateRoute = privateRoutes.some((route) => pathname.startsWith(route));
-    // const isPrivateRoute = privateRoutes.includes(pathname);
-    // const isPublicRoute = publicRoutes.includes(pathname);
   if (!accessToken) {
     if (refreshToken) {
       const data = await checkServerSession();
