@@ -69,5 +69,5 @@ export const checkServerSession = async () => {
     },
   });
 
-  return response.data;
+  return response;
 };

@@ -5,16 +5,19 @@ import { register } from '@/lib/api/clientApi';
 import { useState } from 'react';
 import { ApiError } from '@/types/error';
 import css from"./SignUpPage.module.css"
+import { useAuthStore } from '@/lib/store/authStore';
 
 const Register = () => {
   const router = useRouter();
   const [error, setError] = useState('');
+  const setUser = useAuthStore((state)=>state.setUser)
 
   const handleSRegister = async (formData: FormData) => {
     try {
       const data = Object.fromEntries(formData) as RegisterRequest;
       const res = await register(data);
       if (res) {
+        setUser(res)
         router.push('/profile');
       } else {
         setError('invalid email or password');
