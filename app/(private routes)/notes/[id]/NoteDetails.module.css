@@ -31,7 +31,8 @@
   font-size: 18px;
   line-height: 26px;
   color: #444;
-  white-space: pre-wrap;
+  white-space: pre-wrap; 
+  box-sizing: border-box;
 }
 
 .date {

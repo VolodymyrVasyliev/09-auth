@@ -31,7 +31,8 @@
   font-size: 18px;
   line-height: 26px;
   color: #444;
-  white-space: pre-wrap;
+  overflow: hidden;
+  box-sizing: border-box;
 }
 
 .date {
@@ -68,7 +69,7 @@
 }
 
 .loaderContainer {
-  position: fixed; 
+  position: fixed;
   top: 0;
   left: 0;
   width: 100vw;

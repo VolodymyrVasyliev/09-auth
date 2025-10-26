@@ -49,6 +49,16 @@
 }
 
 .menuLink:hover {
-  /* background-color: #f0f0f0; */
   color: #1d1c1c;
+}
+
+.menuLinkAll {
+  text-decoration: none;
+  color: white;
+  font-size: 22px;
+  font-weight: bold;
+  display: block;
+  padding: 8px 16px;
+  border-radius: 4px;
+  transition: background-color 0.3s ease;
 }

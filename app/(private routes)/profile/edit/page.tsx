@@ -5,6 +5,7 @@ import { useEffect, useState } from 'react';
 import { useRouter } from 'next/navigation';
 import { getMe, updateMe } from '@/lib/api/clientApi';
 import { useAuthStore } from '@/lib/store/authStore';
+import AvatarPicker from '@/components/AvatarPicker/AvatarPicker';
 
 const EditProfile = () => {
   const router = useRouter();
@@ -34,7 +35,6 @@ const EditProfile = () => {
     <main className={css.mainContent}>
       <div className={css.profileCard}>
         <h1 className={css.formTitle}>Edit Profile</h1>
-
         <Image
           src={user?.avatar ?? 'https://ac.goit.global/fullstack/react/default-avatar.jpg'}
           alt="User Avatar"
@@ -42,7 +42,7 @@ const EditProfile = () => {
           height={120}
           className={css.avatar}
         />
-
+        <AvatarPicker/>
         <form onSubmit={handleSaveUser} className={css.profileInfo}>
           <div className={css.usernameWrapper}>
             <label htmlFor="username">Username:</label>

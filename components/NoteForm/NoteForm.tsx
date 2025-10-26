@@ -7,7 +7,18 @@ import { createNote } from '@/lib/api/clientApi';
 import { useNoteDraftStore } from '@/lib/store/noteStore';
 import type { NewNote } from '@/types/note';
 
-const tags = ['Todo', 'Work', 'Personal', 'Meeting', 'Shopping'];
+const tags = [
+  'Todo',
+  'Work',
+  'Personal',
+  'Shopping',
+  'Meeting',
+  'Ideas',
+  'Travel',
+  'Finance',
+  'Health',
+  'Important',
+];
 
 const NoteForm = () => {
   const router = useRouter();
