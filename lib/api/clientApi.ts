@@ -43,7 +43,7 @@ export const updateMe = async (data: UpdateUserRequest) => {
 export const uploadImage = async (file: File): Promise<string> => {
   const formData = new FormData();
   formData.append('file', file);
-  const { data } = await nextServer.post('/users/me', formData);
+  const { data } = await nextServer.post('/upload', formData);
   return data.url;
 };
 

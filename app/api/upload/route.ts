@@ -9,7 +9,7 @@ export async function POST(request: Request) {
   try {
     const formData = await request.formData();
 
-    const { data } = await api.post('/users/me', formData, {
+    const { data } = await api.post('/upload', formData, {
       headers: {
         Cookie: cookieStore.toString(),
       },
