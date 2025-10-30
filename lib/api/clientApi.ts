@@ -8,6 +8,7 @@ type CheckSessionRequest = {
 
 export type UpdateUserRequest = {
   username: string;
+  avatar: string;
 };
 
 export const checkSession = async () => {
@@ -37,6 +38,13 @@ export const getMe = async () => {
 export const updateMe = async (data: UpdateUserRequest) => {
   const response = await nextServer.patch<User>('/users/me', data);
   return response.data;
+};
+
+export const uploadImage = async (file: File): Promise<string> => {
+  const formData = new FormData();
+  formData.append('file', file);
+  const { data } = await nextServer.post('/users/me', formData);
+  return data.url;
 };
 
 export const fetchNotes = async (

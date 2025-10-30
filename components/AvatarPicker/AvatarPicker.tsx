@@ -1,8 +1,14 @@
 'use client';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import Image from 'next/image';
+import css from './AvatarPicker.module.css';
 
-const AvatarPicker = () => {
+type Props = {
+  profilePhotoUrl?: string;
+  onChangePhoto?: (file: File | null) => void;
+};
+
+const AvatarPicker = ({ profilePhotoUrl, onChangePhoto }: Props) => {
   const [previewUrl, setPreviewUrl] = useState('');
   const [error, setError] = useState('');
 
@@ -24,24 +30,47 @@ const AvatarPicker = () => {
         return;
       }
 
+      onChangePhoto(file); // pass the file to the parent component
+
       const reader = new FileReader();
       reader.onloadend = () => {
-        setPreviewUrl(reader.result as string);
+        if (typeof reader.result === 'string') {
+          setPreviewUrl(reader.result);
+        } else {
+          setPreviewUrl('');
+        }
       };
       reader.readAsDataURL(file);
     }
   };
 
+  useEffect(() => {
+    if (profilePhotoUrl) {
+      setPreviewUrl(profilePhotoUrl);
+    }
+  }, [profilePhotoUrl]);
+
+  const handleRemove = () => {
+    onChangePhoto(null);
+    setPreviewUrl('');
+  };
+
   return (
     <div>
-      {previewUrl ? (
-        <Image src={previewUrl} alt="Preview" width={300} height={300} />
-      ) : (
-        <label>
+      <div className={css.picker}>
+        {previewUrl && (
+          <Image src={previewUrl} alt="Preview" width={300} height={300} className={css.avatar} />
+        )}
+        <label className={previewUrl ? `${css.wrapper} ${css.reload}` : css.wrapper}>
           📷 Choose photo
-          <input type="file" accept="image/*" onChange={handleFileChange} />
+          <input type="file" accept="image/*" onChange={handleFileChange} className={css.input} />
         </label>
-      )}
+        {previewUrl && (
+          <button className={css.remove} onClick={handleRemove}>
+            ❌
+          </button>
+        )}
+      </div>
 
       {error && <p>{error}</p>}
     </div>
